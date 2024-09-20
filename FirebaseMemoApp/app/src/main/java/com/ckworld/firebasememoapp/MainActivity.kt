@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val user = auth.currentUser
 //                        Log.d("MainActivity", "signInAnonymously:success " + user!!.uid)
-                        showMsg.setText(user!!.uid)
+                        showMsg.setText("signInAnonymously:success\n${user!!.uid}")
                     } else {
 //                        Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_LONG).show()
                         showMsg.setText("Authentication failed.")
@@ -51,12 +51,12 @@ class MainActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.passwordArea)
 
         registerBtn.setOnClickListener {
-            showMsg.setText("email=${email.text}  password=${password.text}")
+            showMsg.setText("email=${email.text}\npassword=${password.text}")
             auth.createUserWithEmailAndPassword(email.text.toString(), password.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val user = auth.currentUser
-                        showMsg.setText("email=${email.text}  password=${password.text}  createUserWithEmail:success  uid=${user!!.uid}")
+                        showMsg.setText("email=${email.text}\npassword=${password.text}\ncreateUserWithEmail:success\nuid=${user!!.uid}")
                     } else {
 //                        Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_LONG).show()
                         showMsg.setText("createUserWithEmail:failure")
@@ -69,9 +69,9 @@ class MainActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val user = auth.currentUser
-                        showMsg.setText("email=${email.text}  password=${password.text}  signInWithEmail:success  uid=${user!!.uid}")
+                        showMsg.setText("email=${email.text}\npassword=${password.text}\nsignInWithEmail:success\nuid=${user!!.uid}")
                     } else {
-                        Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
                         showMsg.setText("signInWithEmail:failure")
                     }
                 }

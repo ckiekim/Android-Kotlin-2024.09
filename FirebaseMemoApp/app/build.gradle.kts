@@ -57,4 +57,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx")
     // 이메일 인증
     implementation("com.firebaseui:firebase-ui-auth:7.2.0")
+    // Add the dependency for the Realtime Database library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-database-ktx")
 }
