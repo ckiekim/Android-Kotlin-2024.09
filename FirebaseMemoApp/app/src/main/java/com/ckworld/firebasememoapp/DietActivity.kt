@@ -1,8 +1,10 @@
 package com.ckworld.firebasememoapp
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.icu.util.Calendar
 import android.icu.util.GregorianCalendar
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,20 +13,25 @@ import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDate
 
 class DietActivity : AppCompatActivity() {
     var dataList = mutableListOf<DataModel>()
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -37,6 +44,7 @@ class DietActivity : AppCompatActivity() {
 
         val database = Firebase.database
         val myRef = database.getReference("myMemo")
+            .child(Firebase.auth.currentUser!!.uid)
 
         val listView = findViewById<ListView>(R.id.mainList)
         val adapterList = ListViewAdapter(dataList)
@@ -45,6 +53,7 @@ class DietActivity : AppCompatActivity() {
         // Read from the database
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                dataList.clear()
                 for (dataModel in dataSnapshot.children) {
                     Log.d("Database Data", dataModel.toString())
                     dataList.add(dataModel.getValue(DataModel::class.java)!!)
@@ -70,19 +79,24 @@ class DietActivity : AppCompatActivity() {
             val mAlertDialog = mBuilder.show()
 
             val dateSelectBtn = mAlertDialog.findViewById<Button>(R.id.dateSelectBtn)
-            val today = GregorianCalendar()
-            val year: Int = today.get(Calendar.YEAR)
-            val month: Int = today.get(Calendar.MONTH)
-            val day: Int = today.get(Calendar.DAY_OF_MONTH)
-            var dateText = "${year}-${month+1}-${day}"
+//            val today = GregorianCalendar()
+//            val year: Int = today.get(Calendar.YEAR)
+//            val month: Int = today.get(Calendar.MONTH)
+//            val day: Int = today.get(Calendar.DAY_OF_MONTH)
+//            var dateText = "${year}-${month+1}-${day}"
+            val today = LocalDate.now()
+            val year = today.getYear()
+            val month = today.getMonth().getValue()
+            val day = today.getDayOfMonth()
+            var dateText = today.toString()
             dateSelectBtn!!.setOnClickListener {
                 val dlg = DatePickerDialog(this, object : DatePickerDialog.OnDateSetListener {
                     override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
-                        Log.d("DIET", "${year}-${month+1}-${day}")
-                        dateSelectBtn!!.setText("${p1}-${p2+1}-${p3}")
-                        dateText = "${p1}, ${p2+1}, ${p3}"
+                        Log.d("DIET", "${year}-${month}-${day}")
+                        dateText = LocalDate.of(p1, p2+1, p3).toString()
+                        dateSelectBtn!!.setText(dateText)
                     }
-                }, year, month, day)
+                }, year, month-1, day)
                 dlg.show()
             }
 
@@ -98,7 +112,11 @@ class DietActivity : AppCompatActivity() {
             }
         }
 
-
-
+        val logoutBtn = findViewById<ImageView>(R.id.logoutBtn)
+        logoutBtn.setOnClickListener {
+            Firebase.auth.signOut()
+            Log.d("DietActivity", "Logged out")
+            startActivity(Intent(this, SplashActivity::class.java))
+        }
     }
 }
