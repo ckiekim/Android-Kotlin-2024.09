@@ -3,15 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="40dp"
-    android:gravity="center_vertical"
     android:orientation="horizontal"
     android:background="#e0e0e0"
+    android:gravity="center_vertical"
     android:paddingHorizontal="10dp">
 
     <TextView
         android:text="CK World"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />
 
@@ -22,15 +23,25 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="40dp"
+        android:gravity="center_vertical">
 
         <ImageView
+            android:id="@+id/lensBtn"
             android:src="@drawable/lens"
             android:layout_marginRight="10dp"
             android:layout_width="24dp"
             android:layout_height="24dp"/>
 
         <ImageView
+            android:id="@+id/cartBtn"
+            android:src="@drawable/cart"
+            android:layout_marginRight="10dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+
+        <ImageView
+            android:id="@+id/setupBtn"
             android:src="@drawable/setup"
             android:layout_marginRight="10dp"
             android:layout_width="24dp"
@@ -45,6 +56,7 @@
             app:cardCornerRadius="15dp">
 
             <ImageView
+                android:id="@+id/profileBtn"
                 android:src="@drawable/face"
                 android:background="#ff7f00"
                 android:layout_width="30dp"

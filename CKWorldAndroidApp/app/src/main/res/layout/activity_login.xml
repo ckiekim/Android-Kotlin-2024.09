@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".user.LoginActivity"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/exitBtn"
+        android:src="@drawable/x"
+        android:layout_margin="10dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"/>
+    
+    <ImageView
+        android:src="@drawable/ck_logo"
+        android:layout_marginTop="50sp"
+        android:layout_marginBottom="30sp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/emailArea"
+        android:textSize="24sp"
+        android:hint="이메일 주소 입력"
+        android:inputType="textEmailAddress"
+        android:layout_marginHorizontal="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/passwordArea"
+        android:textSize="24sp"
+        android:hint="패스워드 입력"
+        android:inputType="textPassword"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_height="60dp">
+        <Button
+            android:id="@+id/emailLoginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="로그인"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1" />
+        <Button
+            android:id="@+id/emailRegisterBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="회원가입"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <TextView
+        android:text="소셜 로그인"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="40dp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="40dp">
+
+        <ImageView
+            android:src="@drawable/google_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+        <ImageView
+            android:src="@drawable/github_logo"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+        <ImageView
+            android:src="@drawable/naver_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+        <ImageView
+            android:src="@drawable/kakao_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+        <ImageView
+            android:src="@drawable/facebook_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</LinearLayout>
